@@ -1,0 +1,33 @@
+# MailGraph
+# Python dependencies
+*.egg-info/
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg
+
+# Node.js
+node_modules/
+dist/
+npm-debug.log
+*.log
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+
+# Database
+*.db

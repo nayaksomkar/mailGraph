@@ -1,0 +1,64 @@
+version: '3.8'
+services:
+  mongodb:
+    image: mongo:7
+    container_name: mailgraph-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME:-admin}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD:-password}
+      MONGO_INITDB_DATABASE: mailgraph
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - mailgraph-network
+
+  python-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.python
+    container_name: mailgraph-python
+    restart: unless-stopped
+    environment:
+      MONGODB_URI: mongodb://admin:password@mongodb:27017/mailgraph?authSource=admin
+      LLM_PROVIDER: ${LLM_PROVIDER:-groq}
+      GROQ_API_KEY: ${GROQ_API_KEY}
+      MISTRAL_API_KEY: ${MISTRAL_API_KEY}
+      LLM_MODEL: ${LLM_MODEL:-llama-3.1-8b-instant}
+      LLM_TEMPERATURE: ${LLM_TEMPERATURE:-0.7}
+      GMAIL_PROXY_URL: http://node-gmail:3000
+      MAX_ITERATIONS: ${MAX_ITERATIONS:-3}
+      CRITIQUE_THRESHOLD: ${CRITIQUE_THRESHOLD:-8}
+      SECRET_KEY: ${SECRET_KEY}
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongodb
+      - node-gmail
+    networks:
+      - mailgraph-network
+
+  node-gmail:
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+    container_name: mailgraph-node
+    restart: unless-stopped
+    environment:
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+      GOOGLE_REDIRECT_URI: http://localhost:3000/auth/google/callback
+      NODE_PORT: 3000
+    ports:
+      - "3000:3000"
+    networks:
+      - mailgraph-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  mailgraph-network:
+    driver: bridge
