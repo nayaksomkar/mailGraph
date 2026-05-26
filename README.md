@@ -545,7 +545,7 @@ _Generated from the live MongoDB database on 2026-05-26._
 | CATEGORY_PERSONAL | 3 |
 | IMPORTANT | 2 |
 
-### Recent Subjects (last 10)
+### Recent Subjects 
 
 - What costs less than your weekend brunch bill
 - Freelancing at The Lotus House and 11 more jobs in India for you
@@ -554,7 +554,6 @@ _Generated from the live MongoDB database on 2026-05-26._
 - CYBER JAAGROOKTA DIWAS - MAY 2026
 - Get 10% Off Up to ₹1,000 + No Cost EMI
 - New jobs in India. Apply Now.
-- See _keonjhar_handball_, jayantimohanta1 and more in your feed
 - ₹29.00 received in your Federal Savings account
 - Quarterly reminder about YouTube's Terms of Service
 ```
