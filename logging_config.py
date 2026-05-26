@@ -1,3 +1,5 @@
+# Logging setup — writes to both stdout and mailgraph.log
+
 import logging
 import sys
 

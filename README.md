@@ -495,3 +495,97 @@ pytest --cov=. --cov-report=html
 # Open coverage report
 open htmlcov/index.html
 ```
+
+## Fetched Emails Summary (100 emails)
+
+_Generated from the live MongoDB database on 2026-05-26._
+
+- **Total emails fetched:** 100
+- **Unread:** 96 | **Read:** 4
+- **Date range:** 2026-05-09 to 2026-05-26
+
+### Top Senders
+
+| Sender | Emails |
+|--------|--------|
+| Glassdoor Jobs | 15 |
+| Flipkart | 10 |
+| Tata CLiQ Luxury | 9 |
+| Steam | 4 |
+| IRCTC Tourism Packages | 4 |
+| Groww | 4 |
+| Caratlane - A Tata Product | 4 |
+| Tata CLiQ Fashion | 3 |
+| Amazon Web Services | 3 |
+| Instagram | 3 |
+
+### Top Domains
+
+| Domain | Emails |
+|--------|--------|
+| glassdoor.com | 15 |
+| rmp.flipkart.com | 10 |
+| luxeupdates.tatacliq.com | 9 |
+| irctc.co.in | 6 |
+| google.com | 5 |
+| steampowered.com | 4 |
+| marketing.beekeeperstudio.io | 4 |
+| groww.in | 4 |
+| engage.caratlane.com | 4 |
+
+### Label Distribution
+
+| Label | Count |
+|-------|-------|
+| INBOX | 100 |
+| UNREAD | 96 |
+| CATEGORY_UPDATES | 50 |
+| CATEGORY_PROMOTIONS | 44 |
+| CATEGORY_SOCIAL | 3 |
+| CATEGORY_PERSONAL | 3 |
+| IMPORTANT | 2 |
+
+### Recent Subjects (last 10)
+
+- What costs less than your weekend brunch bill
+- Freelancing at The Lotus House and 11 more jobs in India for you
+- Summer, Styled To Perfection
+- What happened in the markets last week?
+- CYBER JAAGROOKTA DIWAS - MAY 2026
+- Get 10% Off Up to ₹1,000 + No Cost EMI
+- New jobs in India. Apply Now.
+- See _keonjhar_handball_, jayantimohanta1 and more in your feed
+- ₹29.00 received in your Federal Savings account
+- Quarterly reminder about YouTube's Terms of Service
+```
+
+---
+
+### Sample Email Summaries & Inbox Q&A
+
+_AI-generated summaries and questions using groq (llama-3.1-8b-instant)._
+
+
+**📧 Email 1**
+> **Subject:** Security alert
+> **From:** `no-reply@accounts.google.com`
+
+**Summary:** Google has detected unauthorized access to some of your account data and recommends checking your account activity to secure your account. To access your account activity and manage access permissions, visit your Google Account or go to myaccount.google.com/notifications.
+
+**🤔 Question:** Did someone else gain unauthorized access to your Google Account data by using the mailGraph application?
+
+**📧 Email 2**
+> **Subject:** A Smarter Way To Shop Gold💛
+> **From:** `tatacliq@mall.tatacliq.com`
+
+**Summary:** Tata CLiQ is hosting The Big CLiQ Sale, offering shopping deals and savings on coins through their app.
+
+**🤔 Question:** Is this email a promotional offer from Tata CLiQ Fashion, or a notification about a specific sale or event?
+
+**📧 Email 3**
+> **Subject:** The Big CLiQ Sale Goes Homegrown
+> **From:** `tatacliqluxury@luxeupdates.tatacliq.com`
+
+**Summary:** You're invited to discover Indian luxury labels at Tata CLiQ Luxury, featuring curated collections of modern and traditional designs. You can unsubscribe from their emails by clicking the link provided.
+
+**🤔 Question:** What is the name of the select group that the recipient is a part of, as mentioned in the email?

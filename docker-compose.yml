@@ -1,3 +1,5 @@
+# Docker Compose — runs MongoDB, Python API, and Node.js Gmail proxy
+
 version: '3.8'
 services:
   mongodb:
@@ -18,7 +20,8 @@ services:
   python-api:
     build:
       context: .
-      dockerfile: Dockerfile.python
+      dockerfile: Dockerfile
+      target: python-api
     container_name: mailgraph-python
     restart: unless-stopped
     environment:
@@ -43,7 +46,8 @@ services:
   node-gmail:
     build:
       context: .
-      dockerfile: Dockerfile.node
+      dockerfile: Dockerfile
+      target: node-gmail
     container_name: mailgraph-node
     restart: unless-stopped
     environment:

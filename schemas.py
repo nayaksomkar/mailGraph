@@ -1,7 +1,11 @@
+# Pydantic models for request/response validation and API contracts
+
 from pydantic import BaseModel, Field
 from typing import List, Optional
 from datetime import datetime
 from enum import Enum
+
+# ── Enums ──────────────────────────────────────────────────────────
 
 class EmailClassification(str, Enum):
     IMPORTANT = "important"
@@ -20,6 +24,8 @@ class DraftStatus(str, Enum):
 class TagSource(str, Enum):
     AUTO = "auto"
     MANUAL = "manual"
+
+# ── Email ───────────────────────────────────────────────────────────
 
 class EmailCreate(BaseModel):
     gmailId: str
@@ -54,6 +60,8 @@ class EmailResponse(BaseModel):
     date: datetime
     snippet: str
 
+# ── Draft ───────────────────────────────────────────────────────────
+
 class DraftCreate(BaseModel):
     emailId: str
     gmailId: str
@@ -81,6 +89,8 @@ class DraftResponse(BaseModel):
     reasoning: str
     confidence: float
 
+# ── Tag ─────────────────────────────────────────────────────────────
+
 class TagCreate(BaseModel):
     name: str
     color: Optional[str] = None
@@ -100,6 +110,8 @@ class TagResponse(BaseModel):
     isSystem: bool
     usageCount: int
     source: TagSource
+
+# ── Requests ────────────────────────────────────────────────────────
 
 class SyncRequest(BaseModel):
     maxResults: int = 50

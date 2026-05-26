@@ -1,3 +1,6 @@
+// Gmail API proxy (Express server) — handles OAuth and provides REST endpoints
+// for listing/getting/sending emails through the Gmail API.
+
 import express, { Request, Response } from "express";
 import cors from "cors";
 import { google, gmail_v1 } from "googleapis";
@@ -17,6 +20,7 @@ const REDIRECT_URI = process.env.GOOGLE_REDIRECT_URI || "http://localhost:3000/a
 let oauth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
 let gmail: gmail_v1.Gmail;
 
+// Middleware: reject requests if OAuth has not been completed
 function ensureAuthenticated(req: Request, res: Response, next: Function) {
   if (!gmail) {
     return res.status(401).json({ error: "Not authenticated. Visit /auth/google first." });
@@ -24,6 +28,7 @@ function ensureAuthenticated(req: Request, res: Response, next: Function) {
   next();
 }
 
+// OAuth: generate the Google consent URL
 app.get("/auth/google/url", (_req: Request, res: Response) => {
   const url = oauth2Client.generateAuthUrl({
     access_type: "offline",
@@ -36,6 +41,7 @@ app.get("/auth/google/url", (_req: Request, res: Response) => {
   res.json({ authUrl: url });
 });
 
+// OAuth: exchange authorization code for tokens
 app.get("/auth/google/callback", async (req: Request, res: Response) => {
   const { code } = req.query;
   if (!code) return res.status(400).json({ error: "Missing code" });
@@ -46,6 +52,7 @@ app.get("/auth/google/callback", async (req: Request, res: Response) => {
   res.json({ success: true, message: "Authenticated" });
 });
 
+// List messages (returns id, threadId, labelIds)
 app.get("/messages", ensureAuthenticated, async (req: Request, res: Response) => {
   const maxResults = parseInt(req.query.maxResults as string) || 50;
   const q = req.query.q as string;
@@ -55,16 +62,19 @@ app.get("/messages", ensureAuthenticated, async (req: Request, res: Response) =>
   res.json(messages);
 });
 
+// Get full message detail including headers and body (format: full)
 app.get("/messages/:id", ensureAuthenticated, async (req: Request, res: Response) => {
   const msg = await gmail.users.messages.get({ userId: "me", id: req.params.id, format: "full" });
   res.json(msg.data);
 });
 
+// Get all messages in a thread
 app.get("/threads/:id", ensureAuthenticated, async (req: Request, res: Response) => {
   const thread = await gmail.users.threads.get({ userId: "me", id: req.params.id });
   res.json(thread.data);
 });
 
+// Send an email (optionally as part of an existing thread)
 app.post("/send", ensureAuthenticated, async (req: Request, res: Response) => {
   const { to, subject, body, threadId } = req.body;
   const headers = [

@@ -1,0 +1,12 @@
+{
+  "prompts": {
+    "email_summary": {
+      "system": "You are an email assistant. Summarize the given email concisely in 1-2 sentences. Focus on the key action, offer, or information. Return ONLY the summary text.",
+      "template": "From: {from_addr}\nSubject: {subject}\nBody: {body}\n\nSummary:"
+    },
+    "question_generation": {
+      "system": "You are an email assistant. Generate a single thoughtful, specific question about the email content that requires reading the email to answer. The question should be useful for someone reviewing their inbox. Return ONLY the question.",
+      "template": "From: {from_addr}\nSubject: {subject}\nBody: {body}\n\nQuestion:"
+    }
+  }
+}
